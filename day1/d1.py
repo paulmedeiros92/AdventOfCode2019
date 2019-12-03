@@ -1,4 +1,4 @@
-f = open("input.txt", "r")
+f = open("day1/input.txt", "r")
 values = f.read().split("\n")  # no empty space at the end of input file
 fuel = 0
 total = 0
