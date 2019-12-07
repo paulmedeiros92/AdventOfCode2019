@@ -28,21 +28,36 @@ def operate(values):
     if opcode == 1:
       i, first, second, target = getOperands(3, values, i)
       summ = (first if c else values[first]) + (second if b else values[second]) 
-      targetI = values[target] if a else target # CAREFUL
-      values[targetI] = summ 
+      values[target] = summ 
     elif opcode == 2:
       i, first, second, target = getOperands(3, values, i)
       product = (first if c else values[first]) * (second if b else values[second])
-      targetI = values[target] if a else target # CAREFUL
-      values[targetI] = product
+      values[target] = product
     elif opcode == 3:
       i, target = getOperands(1, values, i)
       x = int(input('Input: '))
-      targetI = target if c else values[values[target]] # CAREFUL
-      values[target] = x # CAREFUL
+      values[target] = x
     elif opcode == 4:
       i, target = getOperands(1, values, i)
-      print(target if c else values[target]) # CAREFUL
+      print(target if c else values[target])
+    elif opcode == 5:
+      i, first, second = getOperands(2, values, i)
+      jump = (first != 0 if c else values[first] != 0)
+      if jump:
+        i = second if b else values[second]
+    elif opcode == 6:
+      i, first, second = getOperands(2, values, i)
+      jump = (first == 0 if c else values[first] == 0)
+      if jump:
+        i = second if b else values[second]
+    elif opcode == 7:
+      i, first, second, target = getOperands(3, values, i)
+      less = (first if c else values[first]) < (second if b else values[second])
+      values[target] = 1 if less else 0
+    elif opcode == 8:
+      i, first, second, target = getOperands(3, values, i)
+      equal = (first if c else values[first]) == (second if b else values[second])
+      values[target] = 1 if equal else 0
     elif opcode == 99:
       break
     else:
